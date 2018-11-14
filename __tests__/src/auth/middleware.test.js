@@ -18,7 +18,10 @@ beforeAll(async (done) => {
   const admin = await new Users(users.admin).save();
   const editor = await new Users(users.editor).save();
   const user = await new Users(users.user).save();
-  done()
+  done();
+  console.log(admin);
+  console.log(editor);
+  console.log(user);
 });
 
 afterAll(stopDB);
@@ -35,7 +38,7 @@ describe('Auth Middleware', () => {
   // editor:password: ZWRpdG9yOnBhc3N3b3Jk
   // user:password: dXNlcjpwYXNzd29yZA==
   
-  let errorObject = {"message": "Invalid User ID/Password", "status": 401, "statusMessage": "Unauthorized"};
+  let errorObject = {'message': 'Invalid User ID/Password', 'status': 401, 'statusMessage': 'Unauthorized'};
   
   describe('user authentication', () => {
     
@@ -74,7 +77,7 @@ describe('Auth Middleware', () => {
       // the middleware doesn't return a promise but instead throws an
       // error in the main catch block, so this assertion validates that
       // behavior instead of a standard promise signature
-      middleware(req, res, next)
+      middleware(req, res, next);
       expect(next).toHaveBeenCalledWith(errorObject);
 
     }); // it()
@@ -105,7 +108,7 @@ describe('Auth Middleware', () => {
 
       let req = {
         headers: {
-          authorization: `Bearer ${cachedToken}`
+          authorization: `Bearer ${cachedToken}`,
         },
       };
       let res = {};
@@ -113,9 +116,9 @@ describe('Auth Middleware', () => {
       let middleware = auth();
 
       return middleware(req,res,next)
-      .then( () => {
-        expect(next).toHaveBeenCalledWith();
-      });
+        .then( () => {
+          expect(next).toHaveBeenCalledWith();
+        });
 
     }); // it()
 

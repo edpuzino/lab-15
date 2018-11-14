@@ -26,7 +26,7 @@ export const startDB = async () => {
   
   const mongooseOptions = {
     useNewUrlParser:true,
-    useCreateIndex: true
+    useCreateIndex: true,
   };
   
   await mongoose.connect(mongoUri, mongooseOptions, (err) => {
